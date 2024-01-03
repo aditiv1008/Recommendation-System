@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ username }}'s Reading List</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fde8e1;
+      /* Pastel background color */
+      color: #333;
+      margin: 20px;
+    }
+
+    h1,
+    h2 {
+      color: #ff7f50;
+      /* Coral color for headers */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #recommendations {
+      display: none;
+      /* Hide the recommendations table initially */
+    }
+
+    #generateButton {
+      background-color: #ffb6c1;
+      /* Pastel pink */
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      /* Rounded corners */
+      transition: background-color 0.3s;
+      /* Smooth color transition */
+    }
+
+    #generateButton:hover {
+      background-color: #ff69b4;
+      /* Darker pink on hover */
+    }
+  </style>
+  <script>
+    function showRecommendations() {
+      // Show the recommendations table
+      document.getElementById("recommendations").style.display = "block";
+      // Hide the generate button
+      document.getElementById("generateButton").style.display = "none";
+    }
+  </script>
+</head>
+
+<body>
+  <h1>{{ username }}'s Reading List</h1>
+
+  <h2>Books Read</h2>
+  {{ books_read[['Book-Title', 'Book-Author']].to_html(index=False) | safe }}
+
+  <button id="generateButton" onclick="showRecommendations()">Generate Recommendations</button>
+
+  <div id="recommendations">
+    <h2>Recommended Books</h2>
+    {{ recommended_books[['Book Title', 'Book Author']].to_html(index=False) | safe }}
+  </div>
+</body>
+
+</html>
